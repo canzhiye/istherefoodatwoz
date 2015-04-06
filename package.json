@@ -6,5 +6,5 @@
   "keywords": ["node", "express", "static"],
   "scripts": {
     "start": "node server.js"
-  },
+  }
 }
