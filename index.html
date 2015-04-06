@@ -3,6 +3,83 @@
 <head>
 <title>Facebook Login JavaScript Example</title>
 <meta charset="UTF-8">
+<style type="text/css">
+  html{
+    font-family: "Avenir", "Helvetica", Sans-serif;
+    height: 100%;
+    /* Rectangle 245: */
+    background-image:url('http://www.dtbui.com/main.png'), linear-gradient(-180deg, #263238 0%, #455A64 100%);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: contain;
+  }
+  body{
+
+  }
+
+  h1{
+    font-family: "Avenir", "Helvetica", Sans-serif;
+    font-weight: 400;
+    /* NOde.js: */
+    font-size: 64px;
+    color: #FFFFFF;
+    line-height: 87px;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.25);
+  }
+
+  p {
+    /* Is there food in the: */
+opacity: 0.6;
+
+font-size: 20px;
+color: #FFFFFF;
+line-height: 27px;
+margin-top: 160px;
+  }
+
+  .footer{
+    opacity: 0.4;
+    font-size: 12px;
+    margin-top: 25px;
+  }
+
+  #food{
+    color: #ffffff;
+
+  }
+  a:link, a:visited{
+    color: #ffffff;
+  }
+
+  .btn {
+    margin-top: 10px;
+    text-decoration: none;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 100px;
+    background-color: #1D262B;
+    color: #ffffff;
+    /* CHECK AGAIN: */
+font-family: Avenir-Medium;
+font-size: 18px;
+color: #FFFFFF;
+border: none;
+  }
+
+  a{
+    text-decoration: none;
+  }
+  .btn:hover {
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 100px;
+    background-color: #1F292E;
+    color: #ffffff;
+
+  }
+</style>
 </head>
 <body>
 <script type='text/javascript' src="scripts/food.js"></script>
@@ -111,15 +188,33 @@
             console.log("current time: " + now);
             if (start_time.getTime() < now && now < end_time.getTime()) {
               console.log("THERE IS FOOD");
+              var isfood = true;
+              document.getElementById('food').innerHTML = '<h1>node.j<b>YES</b></h1><br /><a href="http://www.facebook.com/events/' + e.id + '/"><span id="check" class="btn">MORE INFO</button></a>'
               break;
             }
           }
         }
       }
+      if(isfood != true){
+        document.getElementById('food').innerHTML = '<h1><b>NO</b>de.js</h1><a href="."><br /><span id="check" class="btn">CHECK AGAIN</button></a>';
+      }
+      
     });
   }
 </script>
 <div id="status">
+  <center>
+  <p>Is there food at the Woz?</p>
+  <span id="food">
+
+    Loading...
+  </span>
+  <p class="footer">
+  Brought to you by <a href="http://canzhiye.com">Canzhi</a> and <a href="http://dtbui.com">David</a>
+  </p>
+
+  
+  </center>
 </div>
 
 </body>
