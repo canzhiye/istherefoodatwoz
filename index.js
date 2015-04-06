@@ -11,10 +11,6 @@ app.get('/', function (req, res) {
 
 app.get('/location', function (req, res) {
     var access_token = process.env.AT;
-    if (err) {
-      console.log(err);
-    }
-    access_token = data;
 
     console.log(req.query.name);
     console.log(access_token);
