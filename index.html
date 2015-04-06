@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Facebook Login JavaScript Example</title>
+<title>Is there free food at Woz?</title>
 <meta charset="UTF-8">
 <style type="text/css">
 @charset "UTF-8";
@@ -3267,126 +3267,29 @@ border: none;
 </style>
 </head>
 <body>
-<script type='text/javascript' src="scripts/food.js"></script>
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      checkEvents();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-        //move this thing around if you want it to be triggered by a button
-      FB.login(function(response){
-      // Handle the response object, like in statusChangeCallback() in our demo
-        // code.
-      });
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-      //move this thing around if you want it to be triggered by a button
-      FB.login(function(response){
 
-      });
+<script>
+  //make API call
+  var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function() {
+    console.log(req.readyState);
+    console.log(req.status);
+    console.log(req.responseText);
+    if (req.readyState == 4 && req.status == 200) {
+        var free_food = JSON.parse(req.responseText);
+        console.log(free_food);
+        if (free_food.food) {
+          $('#load').addClass('animated fadeOut');
+          document.getElementById('food').innerHTML = '<h1 class="animated fadeInDown">node.j<b>YES</b></h1><br /><a href="http://www.facebook.com/events/' + free_food.id + '/"><span id="check" class="btn animated bounceIn">MORE INFO</button></a>'
+        } else {
+          document.getElementById('food').innerHTML = '<h1 class="animated fadeInDown"><b>NO</b>de.js</h1><a href="."><br /><span id="check" class="btn animated bounceIn">CHECK AGAIN</button></a>';
+        }
     }
   }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '954730827904682',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-  });
-
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "http://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function checkEvents() {
-    FB.api('/search?q=wozniak&type=event&limit=1000', function(response) {
-      var data = response.data;
-      for (var i = 0; i < data.length; i++) {
-        e = data[i];
-        console.log(i);
-        if ("location" in e) {
-          if (e.location == "Wozniak Lounge") {
-            console.log(e.name);
-            var start_time = new Date(e.start_time);
-
-            var end_time = new Date();
-            if ("end_time" in e) {
-              end_time = new Date(e.end_time);
-            } else {
-              var mins = 60; //how many minutes we arbitrarily decide the event to be
-              end_time.setTime(start_time.getTime() + (mins * 60 * 1000));
-            }
-
-            var now = new Date();
-            console.log("start time: " + start_time);
-            console.log("end time: " + end_time);
-            console.log("current time: " + now);
-            if (start_time.getTime() < now && now < end_time.getTime()) {
-              console.log("THERE IS FOOD");
-              var isfood = true;
-              $('#load').addClass('animated fadeOut');
-              document.getElementById('food').innerHTML = '<h1 class="animated fadeInDown">node.j<b>YES</b></h1><br /><a href="http://www.facebook.com/events/' + e.id + '/"><span id="check" class="btn animated bounceIn">MORE INFO</button></a>'
-              break;
-            }
-          }
-        }
-      }
-      if(isfood != true){
-        document.getElementById('food').innerHTML = '<h1 class="animated fadeInDown"><b>NO</b>de.js</h1><a href="."><br /><span id="check" class="btn animated bounceIn">CHECK AGAIN</button></a>';
-      }
-      
-    });
-  }
+  //"http://www.istherefreefoodatwoz.com/location?name=wozniak lounge"
+  req.open("GET", "http://www.istherefreefoodatwoz.com/location?name=wozniak lounge", true);
+  req.send();
 </script>
 <div id="status">
   <center>

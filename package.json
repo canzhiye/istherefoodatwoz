@@ -3,8 +3,16 @@
   "description": "AYYY LMAO",
   "repository": "https://github.com/canzhiye/istherefoodatwoz",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"],
+  "keywords": [
+    "node",
+    "express",
+    "static"
+  ],
   "scripts": {
     "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.12.3",
+    "request": "^2.55.0"
   }
 }
