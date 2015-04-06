@@ -9,7 +9,7 @@
     "static"
   ],
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.12.3",
