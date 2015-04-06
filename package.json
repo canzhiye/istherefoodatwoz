@@ -12,6 +12,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.12.3",
     "request": "^2.55.0"
   }
 }

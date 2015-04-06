@@ -49,7 +49,6 @@ app.get('/location', function (req, res) {
                             console.log("end time: " + end_time);
                             console.log("current time: " + now);
                             if (start_time.getTime() < now && now < end_time.getTime()) {
-                                console.log("THERE IS FOOD");
                                 res.json({food: true, id: e.id});
                             }
                       }
