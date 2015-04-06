@@ -3,6 +3,7 @@ var app = express();
 var request = require('request');
 fs = require('fs');
 
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static('at.txt'));
 
 app.get('/', function (req, res) {
@@ -62,11 +63,7 @@ app.get('/location', function (req, res) {
     });
 });
 
-var server = app.listen(3000, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
+var server = app.listen(app.get('port'), function () {
+  console.log("Node app is running at localhost:" + app.get('port'));
 });
 
