@@ -19,16 +19,14 @@ app.get('/location', function (req, res) {
     console.log(url);
     request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body);
+            console.log("body: " + body);
             var data = JSON.parse(body);
             data = data.data;
-            console.log(data.length);
             for (var i = 0; i < data.length; i++) {
                 e = data[i];
-                console.log(i);
                 if ("location" in e) {
                     if (e.location == "Wozniak Lounge") {
-                        console.log(e.name);
+                        console.log("event name: " + e.name);
                         var start_time = new Date(e.start_time);
 
                         var end_time = new Date();
@@ -49,9 +47,9 @@ app.get('/location', function (req, res) {
                   }
                 }
             }
-            res.json({food: false});
+            res.json({food: true});
         } else {
-            console.log(error);
+            console.log("error: " + error);
         }
     });
 });
