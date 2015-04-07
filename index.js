@@ -41,13 +41,13 @@ app.get('/location', function (req, res) {
                         console.log("start time: " + start_time);
                         console.log("end time: " + end_time);
                         console.log("current time: " + now);
-                        if (start_time.getTime() < now && now < end_time.getTime()) {
+                        if (start_time.getTime() > now && now > end_time.getTime()) {
                             res.json({food: true, id: e.id});
                         }
                   }
                 }
             }
-            res.json({food: true});
+            res.json({food: false});
         } else {
             console.log("error: " + error);
         }
