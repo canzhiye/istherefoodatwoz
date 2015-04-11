@@ -10,10 +10,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/location', function (req, res) {
+    var isFood = false;
     var access_token = process.env.AT;
 
-    console.log(req.query.name);
-    console.log(access_token);
+    console.log('query '+ req.query.name);
+    console.log('access_token ' + access_token);
 
     var url = 'https://graph.facebook.com/search?q=' + req.query.name + '&type=event&limit=100&access_token=' + access_token;
     console.log(url);
@@ -42,12 +43,17 @@ app.get('/location', function (req, res) {
                         console.log("end time: " + end_time);
                         console.log("current time: " + now);
                         if (start_time.getTime() < now && now < end_time.getTime()) {
-                            res.json({food: true, id: e.id});
+                            isFood = true;
                         }
                   }
                 }
             }
-            res.json({food: false});
+            if (isFood) {
+                res.json({food: true, id: e.id});
+            } else {
+                res.json({food: false});
+            }
+            return;
         } else {
             console.log("error: " + error);
         }
