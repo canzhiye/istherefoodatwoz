@@ -11,6 +11,7 @@ app.get('/', function (req, res) {
 
 app.get('/location', function (req, res) {
     var isFood = false;
+    var eventID = '';
     var access_token = process.env.AT;
 
     console.log('query '+ req.query.name);
@@ -44,12 +45,13 @@ app.get('/location', function (req, res) {
                         console.log("current time: " + now);
                         if (start_time.getTime() < now && now < end_time.getTime()) {
                             isFood = true;
+                            eventID = e.id;
                         }
                   }
                 }
             }
             if (isFood) {
-                res.json({food: true, id: e.id});
+                res.json({food: true, id: eventID});
             } else {
                 res.json({food: false});
             }
